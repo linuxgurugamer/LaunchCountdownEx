@@ -1,4 +1,5 @@
-﻿using System;
+using KSP.Localization;
+using System;
 using System.IO;
 using System.Collections;
 using System.Collections.Generic;
@@ -16,10 +17,10 @@ namespace NASA_CountDown
 
     public class NC : GameParameters.CustomParameterNode
     {
-        public override string Title { get { return "General Settings"; } }
+        public override string Title { get { return Localizer.Format("#LOC_NASA_14"); } }
         public override GameParameters.GameMode GameMode { get { return GameParameters.GameMode.ANY; } }
-        public override string Section { get { return "NASA Countdown Clock"; } }
-        public override string DisplaySection { get { return "NASA Countdown Clock"; } }
+        public override string Section { get { return Localizer.Format("#LOC_NASA_15"); } }
+        public override string DisplaySection { get { return Localizer.Format("#LOC_NASA_15"); } }
         public override int SectionOrder { get { return 1; } }
         public override bool HasPresets { get { return true; } }
 
@@ -62,7 +63,7 @@ namespace NASA_CountDown
 
         public override bool Enabled(MemberInfo member, GameParameters parameters)
         {
-            if (member.Name == "EnabledForSave") //This Field must always be enabled.
+            if (member.Name == Localizer.Format("#LOC_NASA_16")) //This Field must always be enabled.
                 return true;
 
             return EnabledForSave; //otherwise return true

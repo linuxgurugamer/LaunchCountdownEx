@@ -1,3 +1,4 @@
+using KSP.Localization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -51,7 +52,7 @@ namespace NASA_CountDown.Config
 
         internal static ConfigInfo Instance => _config ?? (_config = new ConfigInfo());
 
-        string SETTINGSNAME = "NASACountdown";
+        string SETTINGSNAME = Localizer.Format("#LOC_NASA_17");
         string PLUGINDATA = KSPUtil.ApplicationRootPath + "GameData/NASA_CountDown/PluginData/NASACountdown.cfg";
 
         public void Save()
@@ -62,11 +63,11 @@ namespace NASA_CountDown.Config
 
             settingsFile.SetNode(SETTINGSNAME, settings, true);
             if (SaveLoadWinPos.Instance.sequenceWindow.width > 0)
-                SaveLoadWinPos.Instance.SaveWinPos(settings, "sequenceWindow", SaveLoadWinPos.Instance.sequenceWindow);
+                SaveLoadWinPos.Instance.SaveWinPos(settings, Localizer.Format("#LOC_NASA_11"), SaveLoadWinPos.Instance.sequenceWindow);
             if (SaveLoadWinPos.Instance.initialWindow.width > 0)
-                SaveLoadWinPos.Instance.SaveWinPos(settings, "initialWindow", SaveLoadWinPos.Instance.initialWindow);
+                SaveLoadWinPos.Instance.SaveWinPos(settings, Localizer.Format("#LOC_NASA_12"), SaveLoadWinPos.Instance.initialWindow);
             if (SaveLoadWinPos.Instance.settingsWindow.width > 0)
-                SaveLoadWinPos.Instance.SaveWinPos(settings, "settingsWindow", SaveLoadWinPos.Instance.settingsWindow);
+                SaveLoadWinPos.Instance.SaveWinPos(settings, Localizer.Format("#LOC_NASA_13"), SaveLoadWinPos.Instance.settingsWindow);
 
             settings.AddValue("soundEnabled", IsSoundEnabled);
             settings.AddValue("scale", Scale);
@@ -76,7 +77,7 @@ namespace NASA_CountDown.Config
 
             foreach (var sequence in Sequences)
             {
-                var seqNode = new ConfigNode("sequence");
+                var seqNode = new ConfigNode(Localizer.Format("#LOC_NASA_18"));
                 seqNode.AddValue("id", sequence.Key);
 
                 seqNode.AddValue("useGravityTurn", VesselOptions[sequence.Key].useGravityTurn);
@@ -220,7 +221,7 @@ namespace NASA_CountDown.Config
         private void LoadSounds()
         {
             var soundsList =
-                GameDatabase.Instance.databaseAudio.Where(x => x.name.StartsWith("NASA_CountDown", StringComparison.OrdinalIgnoreCase))
+                GameDatabase.Instance.databaseAudio.Where(x => x.name.StartsWith(Localizer.Format("#LOC_NASA_19"), StringComparison.OrdinalIgnoreCase))
                     .Select(x => x.name)
                     .ToList();
 

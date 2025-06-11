@@ -1,4 +1,5 @@
-﻿
+
+using KSP.Localization;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -98,11 +99,11 @@ namespace NASA_CountDown
             string minVersion = "";
             if (GravityTurnAssembly == null)
             {
-                gtName = "GravityTurn";
+                gtName = Localizer.Format("#LOC_NASA_7");
                 GravityTurnAssembly = GravityTurnAPI.VerifyAssemblyVersion(gtName, minVersion);
                 if (GravityTurnAssembly == null)
                 {
-                    gtName = "GravityTurnContinued";
+                    gtName = Localizer.Format("#LOC_NASA_8");
                     GravityTurnAssembly = GravityTurnAPI.VerifyAssemblyVersion(gtName, minVersion);
                 }
                 GTAvailable = (GravityTurnAssembly != null);
@@ -111,7 +112,7 @@ namespace NASA_CountDown
             return GravityTurnAssembly != null;
         }
 
-        static string gtName = "GravityTurn";
+        static string gtName = Localizer.Format("#LOC_NASA_7");
         public static bool Launch()
         {
             Log.Info("Launch");
@@ -125,6 +126,7 @@ namespace NASA_CountDown
             try
             {
                 //Type calledType = Type.GetType("GravityTurn.GravityTurner,GravityTurn");
+                #region NO_LOCALIZATION
                 Type calledType = Type.GetType("GravityTurn.GravityTurner," + gtName);
                 if (calledType != null)
                 {
@@ -132,7 +134,7 @@ namespace NASA_CountDown
                     if (GTRef != null)
                     {
                         MethodInfo myMethod = calledType.GetMethod("Launch", BindingFlags.Instance | BindingFlags.Public);
-
+                        #endregion
                         if (myMethod != null)
                         {
                             Log.Info("Invoking Launch");
@@ -176,6 +178,7 @@ namespace NASA_CountDown
             Log.Info("GravityTurn detected");
             try
             {
+                #region NO_LOCALIZATION
                 //Type calledType = Type.GetType("GravityTurn.GravityTurner,GravityTurn");
                 Type calledType = Type.GetType("GravityTurn.GravityTurner," + gtName);
                 if (calledType != null)
@@ -184,7 +187,7 @@ namespace NASA_CountDown
                     if (GTRef != null)
                     {
                         MethodInfo myMethod = calledType.GetMethod("Kill", BindingFlags.Instance | BindingFlags.Public);
-
+                        #endregion
                         if (myMethod != null)
                         {
                             Log.Info("Invoking Kill");

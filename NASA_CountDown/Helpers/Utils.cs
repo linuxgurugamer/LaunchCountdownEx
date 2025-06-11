@@ -1,4 +1,5 @@
-﻿using System;
+using KSP.Localization;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -36,7 +37,7 @@ namespace NASA_CountDown.Helpers
 
                 GUILayout.FlexibleSpace();
 
-                if (GUILayout.Button("Done"))
+                if (GUILayout.Button(Localizer.Format("#LOC_NASA_28")))
                 {
                     _elements[caption.GetHashCode()] = false;
                     onSubmit(value);
@@ -51,7 +52,7 @@ namespace NASA_CountDown.Helpers
 
                 GUILayout.FlexibleSpace();
 
-                if (GUILayout.Button("Edit"))
+                if (GUILayout.Button(Localizer.Format("#LOC_NASA_29")))
                 {
                     _elements[caption.GetHashCode()] = true;
                 }

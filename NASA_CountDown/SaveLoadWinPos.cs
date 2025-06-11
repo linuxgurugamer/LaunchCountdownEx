@@ -1,4 +1,5 @@
-﻿using System;
+using KSP.Localization;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -133,15 +134,15 @@ namespace NASA_CountDown
             if (settings != null)
             { 
                 
-                sequenceWindow = GetWinPos(settings, "sequenceWindow", SEQ_WIDTH, SEQ_HEIGHT, false);
-                initialWindow = GetWinPos(settings, "initialWindow", CNT_WIDTH, CNT_HEIGHT);
-                settingsWindow = GetWinPos(settings, "settingsWindow", CFG_WIDTH, CFG_HEIGHT, false);
+                sequenceWindow = GetWinPos(settings, Localizer.Format("#LOC_NASA_11"), SEQ_WIDTH, SEQ_HEIGHT, false);
+                initialWindow = GetWinPos(settings, Localizer.Format("#LOC_NASA_12"), CNT_WIDTH, CNT_HEIGHT);
+                settingsWindow = GetWinPos(settings, Localizer.Format("#LOC_NASA_13"), CFG_WIDTH, CFG_HEIGHT, false);
             }
             else
             {
-                sequenceWindow = GetWinPos(settings, "sequenceWindow", SEQ_WIDTH, SEQ_HEIGHT, false);
-                initialWindow = GetWinPos(settings, "initialWindow", CNT_WIDTH, CNT_HEIGHT);
-                settingsWindow = GetWinPos(settings, "settingsWindow", CFG_WIDTH, CFG_HEIGHT, false);
+                sequenceWindow = GetWinPos(settings, Localizer.Format("#LOC_NASA_11"), SEQ_WIDTH, SEQ_HEIGHT, false);
+                initialWindow = GetWinPos(settings, Localizer.Format("#LOC_NASA_12"), CNT_WIDTH, CNT_HEIGHT);
+                settingsWindow = GetWinPos(settings, Localizer.Format("#LOC_NASA_13"), CFG_WIDTH, CFG_HEIGHT, false);
             }
         }
     }

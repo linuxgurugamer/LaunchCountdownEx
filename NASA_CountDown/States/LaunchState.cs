@@ -1,4 +1,5 @@
-﻿using System;
+using KSP.Localization;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -109,7 +110,7 @@ namespace NASA_CountDown.States
                 //BaseAction.FireAction(FlightGlobals.ActiveVessel.Parts, KSPActionGroup.Abort,0, KSPActionType.Activate);
             }
 
-            Machine.RunEvent("Init");
+            Machine.RunEvent(Localizer.Format("#LOC_NASA_2"));
             yield return null;
         }
 
@@ -214,7 +215,7 @@ namespace NASA_CountDown.States
             switch (data.to)
             {
                 case Vessel.Situations.FLYING:
-                    Machine.RunEvent("Launched");
+                    Machine.RunEvent(Localizer.Format("#LOC_NASA_6"));
                     break;
                 case Vessel.Situations.LANDED:
                     break;
@@ -223,7 +224,7 @@ namespace NASA_CountDown.States
                 case Vessel.Situations.ORBITING:
                 case Vessel.Situations.ESCAPING:
                 case Vessel.Situations.DOCKED:
-                    Machine.RunEvent("Finish");
+                    Machine.RunEvent(Localizer.Format("#LOC_NASA_1"));
                     break;
                 case Vessel.Situations.PRELAUNCH:
                     break;

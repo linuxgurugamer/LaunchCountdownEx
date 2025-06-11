@@ -1,4 +1,5 @@
-﻿using System;
+using KSP.Localization;
+using System;
 
 using System.Linq;
 using System.Collections;
@@ -75,7 +76,7 @@ namespace NASA_CountDown.States
                 yield return new WaitForSeconds(clip.length);
             }
             
-            Machine.RunEvent("Finish");
+            Machine.RunEvent(Localizer.Format("#LOC_NASA_1"));
         }
 
         public override void Draw()

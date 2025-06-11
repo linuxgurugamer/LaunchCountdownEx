@@ -1,4 +1,5 @@
-﻿using System;
+using KSP.Localization;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using NASA_CountDown.Config;
@@ -39,7 +40,7 @@ namespace NASA_CountDown.States
         {
             GUILayout.BeginVertical(GUILayout.ExpandHeight(true));
 
-            ConfigInfo.Instance.AbortExecuted = GUILayout.Toggle(ConfigInfo.Instance.AbortExecuted, "Abort execute", StyleFactory.ToggleStyle);
+            ConfigInfo.Instance.AbortExecuted = GUILayout.Toggle(ConfigInfo.Instance.AbortExecuted, Localizer.Format("#LOC_NASA_44"), StyleFactory.ToggleStyle);
 
             GUILayout.BeginHorizontal();
             GUILayout.FlexibleSpace();
@@ -51,7 +52,7 @@ namespace NASA_CountDown.States
 
             GUI.enabled = _soundsList.Any();
 
-            ConfigInfo.Instance.IsSoundEnabled = _soundsList.Any() && GUILayout.Toggle(ConfigInfo.Instance.IsSoundEnabled, "Sound enabled", StyleFactory.ToggleStyle);
+            ConfigInfo.Instance.IsSoundEnabled = _soundsList.Any() && GUILayout.Toggle(ConfigInfo.Instance.IsSoundEnabled, Localizer.Format("#LOC_NASA_45"), StyleFactory.ToggleStyle);
 
             if (_soundsList.Any() && ConfigInfo.Instance.IsSoundEnabled)
             {
@@ -60,7 +61,7 @@ namespace NASA_CountDown.States
                 GUILayout.BeginHorizontal();
                 GUILayout.FlexibleSpace();
 
-                GUILayout.Label("Sound set", StyleFactory.LabelStyle);
+                GUILayout.Label(Localizer.Format("#LOC_NASA_46"), StyleFactory.LabelStyle);
 
                 GUILayout.FlexibleSpace();
                 GUILayout.EndHorizontal();
@@ -104,7 +105,7 @@ namespace NASA_CountDown.States
                     StyleFactory.ButtonBackStyle))
             {
                 CountDownMain.instance.saveLoadWinPos.SaveSettings();
-                Machine.RunEvent("Init");
+                Machine.RunEvent(Localizer.Format("#LOC_NASA_2"));
             }
 
             GUILayout.EndVertical();

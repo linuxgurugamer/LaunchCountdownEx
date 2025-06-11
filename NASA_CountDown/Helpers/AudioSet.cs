@@ -1,4 +1,5 @@
-﻿using System;
+using KSP.Localization;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -11,14 +12,14 @@ namespace NASA_CountDown.Helpers
         {
             Name = name;
 
-            var sounds = GameDatabase.Instance.databaseAudio.Where(x => x.name.StartsWith("NASA_CountDown", StringComparison.OrdinalIgnoreCase) && x.name.Contains(name)).ToList();
+            var sounds = GameDatabase.Instance.databaseAudio.Where(x => x.name.StartsWith(Localizer.Format("#LOC_NASA_19"), StringComparison.OrdinalIgnoreCase) && x.name.Contains(name)).ToList();
 
-            TimerSounds = sounds.Where(x => x.name.Contains("/Timer")).ToList();
-            Abort = sounds.FirstOrDefault(x => x.name.EndsWith("Aborted", StringComparison.OrdinalIgnoreCase));
-            Hold = sounds.FirstOrDefault(x => x.name.EndsWith("Hold", StringComparison.OrdinalIgnoreCase));
-            LiftOff = sounds.FirstOrDefault(x => x.name.EndsWith("LiftOff", StringComparison.OrdinalIgnoreCase));
-            AllEngineRunnig = sounds.FirstOrDefault(x => x.name.EndsWith("AllEngineRuning", StringComparison.OrdinalIgnoreCase));
-            TowerCleared = sounds.FirstOrDefault(x => x.name.EndsWith("TowerCleared", StringComparison.OrdinalIgnoreCase));
+            TimerSounds = sounds.Where(x => x.name.Contains(Localizer.Format("#LOC_NASA_20"))).ToList();
+            Abort = sounds.FirstOrDefault(x => x.name.EndsWith(Localizer.Format("#LOC_NASA_21"), StringComparison.OrdinalIgnoreCase));
+            Hold = sounds.FirstOrDefault(x => x.name.EndsWith(Localizer.Format("#LOC_NASA_22"), StringComparison.OrdinalIgnoreCase));
+            LiftOff = sounds.FirstOrDefault(x => x.name.EndsWith(Localizer.Format("#LOC_NASA_23"), StringComparison.OrdinalIgnoreCase));
+            AllEngineRunnig = sounds.FirstOrDefault(x => x.name.EndsWith(Localizer.Format("#LOC_NASA_24"), StringComparison.OrdinalIgnoreCase));
+            TowerCleared = sounds.FirstOrDefault(x => x.name.EndsWith(Localizer.Format("#LOC_NASA_25"), StringComparison.OrdinalIgnoreCase));
         }
 
         public List<AudioClip> TimerSounds { get; private set; }

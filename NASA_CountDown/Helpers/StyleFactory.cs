@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+using KSP.Localization;
+using UnityEngine;
 using ToolbarControl_NS;
 
 namespace NASA_CountDown.Helpers
@@ -22,18 +23,18 @@ namespace NASA_CountDown.Helpers
             {
                 fixedWidth = Mathf.RoundToInt(459f * Scale),
                 fixedHeight = Mathf.RoundToInt(120f * Scale),
-                normal = { background = GetTexture("BGFull") },
-                active = { background = GetTexture("BGFull") },
-                hover = { background = GetTexture("BGFull") }
+                normal = { background = GetTexture(Localizer.Format("#LOC_NASA_26")) },
+                active = { background = GetTexture(Localizer.Format("#LOC_NASA_26")) },
+                hover = { background = GetTexture(Localizer.Format("#LOC_NASA_26")) }
             };
 
             LaunchSequenceStyle = new GUIStyle()
             {
                 fixedWidth = 270f,
                 fixedHeight = 500f,
-                normal = { background = GetTexture("LaunchSeqBG") },
-                active = { background = GetTexture("LaunchSeqBG") },
-                hover = { background = GetTexture("LaunchSeqBG") },
+                normal = { background = GetTexture(Localizer.Format("#LOC_NASA_27")) },
+                active = { background = GetTexture(Localizer.Format("#LOC_NASA_27")) },
+                hover = { background = GetTexture(Localizer.Format("#LOC_NASA_27")) },
             };
 
             SettingsStyle = new GUIStyle(LaunchSequenceStyle)
@@ -42,6 +43,7 @@ namespace NASA_CountDown.Helpers
                 fixedHeight = 270f,
             };
 
+            #region NO_LOCALIZATION
             ButtonLaunchStyle = new GUIStyle()
             {
                 fixedWidth = Mathf.RoundToInt(153f * Scale),
@@ -185,6 +187,7 @@ namespace NASA_CountDown.Helpers
                 fixedWidth = 90
             };
 
+            #endregion
             LabelStyle = new GUIStyle(HighLogic.Skin.label) { alignment = TextAnchor.MiddleCenter };
 
             ToggleStyle = new GUIStyle(HighLogic.Skin.toggle) { margin = new RectOffset(12, 12, 4, 4) };

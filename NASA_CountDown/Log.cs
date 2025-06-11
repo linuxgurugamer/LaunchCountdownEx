@@ -1,4 +1,5 @@
-﻿using System;
+using KSP.Localization;
+using System;
 using System.Collections;
 using System.Diagnostics;
 
@@ -18,7 +19,7 @@ namespace NASA_CountDown
 
         public static LEVEL level = LEVEL.INFO;
 
-        private static readonly String PREFIX = "NASA_Countdown" + ": ";
+        private static readonly String PREFIX = Localizer.Format("#LOC_NASA_9") + ": ";
 
         public static LEVEL GetLevel()
         {

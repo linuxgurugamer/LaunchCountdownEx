@@ -1,4 +1,5 @@
-﻿using System;
+using KSP.Localization;
+using System;
 using System.Linq;
 using KSP.UI;
 using KSP.UI.Screens;
@@ -69,18 +70,18 @@ namespace NASA_CountDown.States
             GUILayout.Space(10);
             GUILayout.FlexibleSpace();
 
-            ConfigInfo.Instance.VesselOptions[ModuleNASACountdown.CraftName(FlightGlobals.ActiveVessel)].LaunchSequenceControl = GUILayout.Toggle(ConfigInfo.Instance.VesselOptions[ModuleNASACountdown.CraftName(FlightGlobals.ActiveVessel)].LaunchSequenceControl, "Launch sequence control", StyleFactory.ToggleStyle);
-            ConfigInfo.Instance.VesselOptions[ModuleNASACountdown.CraftName(FlightGlobals.ActiveVessel)].enableSAS = GUILayout.Toggle(ConfigInfo.Instance.VesselOptions[ModuleNASACountdown.CraftName(FlightGlobals.ActiveVessel)].enableSAS, "Enable SAS at launch", StyleFactory.ToggleStyle);
+            ConfigInfo.Instance.VesselOptions[ModuleNASACountdown.CraftName(FlightGlobals.ActiveVessel)].LaunchSequenceControl = GUILayout.Toggle(ConfigInfo.Instance.VesselOptions[ModuleNASACountdown.CraftName(FlightGlobals.ActiveVessel)].LaunchSequenceControl, Localizer.Format("#LOC_NASA_34"), StyleFactory.ToggleStyle);
+            ConfigInfo.Instance.VesselOptions[ModuleNASACountdown.CraftName(FlightGlobals.ActiveVessel)].enableSAS = GUILayout.Toggle(ConfigInfo.Instance.VesselOptions[ModuleNASACountdown.CraftName(FlightGlobals.ActiveVessel)].enableSAS, Localizer.Format("#LOC_NASA_35"), StyleFactory.ToggleStyle);
             GUILayout.BeginHorizontal();
             GUILayout.Space(20);
-            GUILayout.Label("Initial throttle (" + (ConfigInfo.Instance.VesselOptions[ModuleNASACountdown.CraftName(FlightGlobals.ActiveVessel)].defaultInitialThrottle*100).ToString("F1") + "%):");
+            GUILayout.Label(Localizer.Format("#LOC_NASA_36") + (ConfigInfo.Instance.VesselOptions[ModuleNASACountdown.CraftName(FlightGlobals.ActiveVessel)].defaultInitialThrottle*100).ToString("F1") + "%):");
             GUILayout.FlexibleSpace();
             ConfigInfo.Instance.VesselOptions[ModuleNASACountdown.CraftName(FlightGlobals.ActiveVessel)].defaultInitialThrottle = GUILayout.HorizontalSlider(ConfigInfo.Instance.VesselOptions[ModuleNASACountdown.CraftName(FlightGlobals.ActiveVessel)].defaultInitialThrottle, 0.01f, 0.99f, GUILayout.Width(100));
             GUILayout.Space(20);
             GUILayout.EndHorizontal();
             GUILayout.BeginHorizontal();
             GUILayout.Space(20);
-            GUILayout.Label("Final throttle (" + (ConfigInfo.Instance.VesselOptions[ModuleNASACountdown.CraftName(FlightGlobals.ActiveVessel)].defaultThrottle * 100).ToString("F1") + "%):");
+            GUILayout.Label(Localizer.Format("#LOC_NASA_37") + (ConfigInfo.Instance.VesselOptions[ModuleNASACountdown.CraftName(FlightGlobals.ActiveVessel)].defaultThrottle * 100).ToString("F1") + "%):");
             GUILayout.FlexibleSpace();
             ConfigInfo.Instance.VesselOptions[ModuleNASACountdown.CraftName(FlightGlobals.ActiveVessel)].defaultThrottle = GUILayout.HorizontalSlider(ConfigInfo.Instance.VesselOptions[ModuleNASACountdown.CraftName(FlightGlobals.ActiveVessel)].defaultThrottle, 0.01f, 1.0f, GUILayout.Width(100));
             GUILayout.Space(20);
@@ -90,14 +91,14 @@ namespace NASA_CountDown.States
                 GUI.enabled = false;
             if (GravityTurnAPI.GTAvailable)
             {
-                ConfigInfo.Instance.VesselOptions[ModuleNASACountdown.CraftName(FlightGlobals.ActiveVessel)].useGravityTurn = GUILayout.Toggle(ConfigInfo.Instance.VesselOptions[ModuleNASACountdown.CraftName(FlightGlobals.ActiveVessel)].useGravityTurn, "Use Gravity Turn", StyleFactory.ToggleStyle);
+                ConfigInfo.Instance.VesselOptions[ModuleNASACountdown.CraftName(FlightGlobals.ActiveVessel)].useGravityTurn = GUILayout.Toggle(ConfigInfo.Instance.VesselOptions[ModuleNASACountdown.CraftName(FlightGlobals.ActiveVessel)].useGravityTurn, Localizer.Format("#LOC_NASA_38"), StyleFactory.ToggleStyle);
             }
             GUI.enabled = true;
             GUILayout.BeginHorizontal();
             GUILayout.FlexibleSpace();
-            GUILayout.Label("Elapsed time", StyleFactory.LabelStyle);
+            GUILayout.Label(Localizer.Format("#LOC_NASA_39"), StyleFactory.LabelStyle);
             GUILayout.FlexibleSpace();
-            GUILayout.Label("Stage number", StyleFactory.LabelStyle);
+            GUILayout.Label(Localizer.Format("#LOC_NASA_40"), StyleFactory.LabelStyle);
             GUILayout.FlexibleSpace();
             GUILayout.EndHorizontal();
 
@@ -108,10 +109,10 @@ namespace NASA_CountDown.States
 
                 GUILayout.Label($"{i + 1} second", StyleFactory.LabelStyle);
                 GUILayout.FlexibleSpace();
-                GUILayout.Label(ConfigInfo.Instance.Sequences[ModuleNASACountdown.CraftName(FlightGlobals.ActiveVessel)][i] < 0 ? "none" : ConfigInfo.Instance.Sequences[ModuleNASACountdown.CraftName(FlightGlobals.ActiveVessel)][i].ToString(), StyleFactory.LabelStyle, GUILayout.MinWidth(40));
+                GUILayout.Label(ConfigInfo.Instance.Sequences[ModuleNASACountdown.CraftName(FlightGlobals.ActiveVessel)][i] < 0 ? Localizer.Format("#LOC_NASA_41") : ConfigInfo.Instance.Sequences[ModuleNASACountdown.CraftName(FlightGlobals.ActiveVessel)][i].ToString(), StyleFactory.LabelStyle, GUILayout.MinWidth(40));
 
                 bool flag = _isEditorState && i != _stageIndex;
-                string label = _isEditorState && i == _stageIndex ? "Done" : "Set";
+                string label = _isEditorState && i == _stageIndex ? Localizer.Format("#LOC_NASA_28") : Localizer.Format("#LOC_NASA_42");
 
                 GUI.enabled = !flag;
 
@@ -122,7 +123,7 @@ namespace NASA_CountDown.States
                 }
                 GUI.enabled = true;
 
-                if (GUILayout.Button("Clear"))
+                if (GUILayout.Button(Localizer.Format("#LOC_NASA_43")))
                 {
                     _isEditorState = false;
                     _stageIndex = -1;
@@ -139,7 +140,7 @@ namespace NASA_CountDown.States
             if (GUILayout.Button(new GUIContent(), StyleFactory.ButtonBackStyle))
             {
                 CountDownMain.instance.saveLoadWinPos.SaveSettings();
-                Machine.RunEvent("Init");
+                Machine.RunEvent(Localizer.Format("#LOC_NASA_2"));
             }
 
             GUILayout.FlexibleSpace();

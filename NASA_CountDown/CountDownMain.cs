@@ -1,4 +1,5 @@
-﻿using System.Collections;
+using KSP.Localization;
+using System.Collections;
 
 using KSP.UI.Screens;
 using NASA_CountDown.Common;
@@ -76,7 +77,7 @@ namespace NASA_CountDown
 
             NASA_CountDown.Config.ConfigInfo.Instance.Load();
             GravityTurnAPI.GravityTurnActive = false;
-
+            #region NO_LOCALIZATION
             toolbarControl = gameObject.AddComponent<ToolbarControl>();
             toolbarControl.AddToAllToolbars(ToggleOn,ToggleOff,
                 ApplicationLauncher.AppScenes.FLIGHT,
@@ -86,12 +87,13 @@ namespace NASA_CountDown
                 "NASA_CountDown/Icons/launch_icon_normal_24",
                 MODNAME
             );
+            #endregion
         }
 
         void ToggleOff()
         {
             Log.Info("ToggleOff");
-            _machine.RunEvent("Finish");
+            _machine.RunEvent(Localizer.Format("#LOC_NASA_1"));
 
             //saveLoadWinPos.LoadWindowPositions();
             
@@ -114,9 +116,9 @@ namespace NASA_CountDown
             Log.Info("ToggleOn");
             if (!_machine.Started)
             {
-                _machine.StartFSM("Init");
+                _machine.StartFSM(Localizer.Format("#LOC_NASA_2"));
             } else {
-                _machine.RunEvent("Init");
+                _machine.RunEvent(Localizer.Format("#LOC_NASA_2"));
             }
 
             saveLoadWinPos.LoadWindowPositions();
@@ -135,38 +137,38 @@ namespace NASA_CountDown
 
             // Create the states
 
-            initial = new InitialState("Init", _machine);
-            settings = new SettingState("Settings", _machine);
-            sequence = new SequenceState("Sequence", _machine);
-            launch = new LaunchState("Launch", _machine);
-            launched = new LaunchedState("Launched", _machine);
-            finish = new KFSMState("Finish");
+            initial = new InitialState(Localizer.Format("#LOC_NASA_2"), _machine);
+            settings = new SettingState(Localizer.Format("#LOC_NASA_3"), _machine);
+            sequence = new SequenceState(Localizer.Format("#LOC_NASA_4"), _machine);
+            launch = new LaunchState(Localizer.Format("#LOC_NASA_5"), _machine);
+            launched = new LaunchedState(Localizer.Format("#LOC_NASA_6"), _machine);
+            finish = new KFSMState(Localizer.Format("#LOC_NASA_1"));
 
             // Add events to the states
 
-            var go2Finish = new KFSMEvent("Finish")
+            var go2Finish = new KFSMEvent(Localizer.Format("#LOC_NASA_1"))
             {
                 GoToStateOnEvent = finish,
                 updateMode = KFSMUpdateMode.MANUAL_TRIGGER
             };
 
-            var go2Settings = new KFSMEvent("Settings") { GoToStateOnEvent = settings, updateMode = KFSMUpdateMode.MANUAL_TRIGGER };
+            var go2Settings = new KFSMEvent(Localizer.Format("#LOC_NASA_3")) { GoToStateOnEvent = settings, updateMode = KFSMUpdateMode.MANUAL_TRIGGER };
             initial.AddEvent(go2Settings);
 
-            var go2Init = new KFSMEvent("Init") { GoToStateOnEvent = initial, updateMode = KFSMUpdateMode.MANUAL_TRIGGER };
+            var go2Init = new KFSMEvent(Localizer.Format("#LOC_NASA_2")) { GoToStateOnEvent = initial, updateMode = KFSMUpdateMode.MANUAL_TRIGGER };
             settings.AddEvent(go2Init);
             sequence.AddEvent(go2Init);
             finish.AddEvent(go2Init);
 
-            var go2Sequence = new KFSMEvent("Sequence") { GoToStateOnEvent = sequence, updateMode = KFSMUpdateMode.MANUAL_TRIGGER };
+            var go2Sequence = new KFSMEvent(Localizer.Format("#LOC_NASA_4")) { GoToStateOnEvent = sequence, updateMode = KFSMUpdateMode.MANUAL_TRIGGER };
             initial.AddEvent(go2Sequence);
 
-            var go2Launch = new KFSMEvent("Launch") { GoToStateOnEvent = launch, updateMode = KFSMUpdateMode.MANUAL_TRIGGER };
+            var go2Launch = new KFSMEvent(Localizer.Format("#LOC_NASA_5")) { GoToStateOnEvent = launch, updateMode = KFSMUpdateMode.MANUAL_TRIGGER };
             initial.AddEvent(go2Launch);
             launch.AddEvent(go2Init);
             launch.AddEvent(go2Finish);
 
-            var go2Launched = new KFSMEvent("Launched") { GoToStateOnEvent = launched, updateMode = KFSMUpdateMode.MANUAL_TRIGGER };
+            var go2Launched = new KFSMEvent(Localizer.Format("#LOC_NASA_6")) { GoToStateOnEvent = launched, updateMode = KFSMUpdateMode.MANUAL_TRIGGER };
             launch.AddEvent(go2Launched);
 
             initial.AddEvent(go2Finish);
