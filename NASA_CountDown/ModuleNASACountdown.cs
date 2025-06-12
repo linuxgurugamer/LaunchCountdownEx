@@ -20,7 +20,7 @@ namespace NASA_CountDown
             var stackTrace = new StackTrace(true);
             foreach (var r in stackTrace.GetFrames())
             {
-                Console.WriteLine(Localizer.Format("#LOC_NASA_10"),
+                Console.WriteLine(Localizer.Format("Filename: {0} Method: {1} Line: {2} Column: {3}  "),
                     r.GetFileName(), r.GetMethod(), r.GetFileLineNumber(),
                     r.GetFileColumnNumber());
             }
