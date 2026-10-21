@@ -58,7 +58,7 @@ namespace NASA_CountDown.States
             Log.Info("OnEnterToState: InitialState");
             if (FlightGlobals.ActiveVessel.situation != Vessel.Situations.PRELAUNCH)
             {
-                Machine.RunEvent(Localizer.Format("#LOC_NASA_1"));
+                Machine.RunEvent(Localizer.Format("Finish"));
             }
 
             _obj = new GameObject(Localizer.Format("#LOC_NASA_30"));
@@ -169,11 +169,12 @@ namespace NASA_CountDown.States
 
         protected virtual void DrawButtons()
         {
-            Log.Info("InitialState.DrawButtons");
+            //Log.Info("InitialState.DrawButtons");
             var buttonWidth = StyleFactory.ButtonLaunchStyle.fixedWidth;
             var buttonHeight = StyleFactory.ButtonLaunchStyle.fixedHeight;
 
-            Log.Info("DrawButtons, buttonWidth: " + buttonWidth + ", " + buttonHeight + ", xMin: " + _windowRect.xMin + ", yMax - delta: " + (_windowRect.yMax - _delta));
+            // Log.Info("DrawButtons, buttonWidth: " + buttonWidth + ", " + buttonHeight + ", xMin: " + _windowRect.xMin + ", yMax - delta: " + (_windowRect.yMax - _delta));
+
             //launch
             if (GUI.Button(new Rect(_windowRect.xMin, _windowRect.yMax - _delta, buttonWidth, buttonHeight),
                 string.Empty,
@@ -182,7 +183,7 @@ namespace NASA_CountDown.States
                 CountDownMain.instance.saveLoadWinPos.initialWindow = CountDownMain.instance.initial._windowRect;
                // CountDownMain.instance.saveLoadWinPos.SaveSettings();
                 
-                Machine.RunEvent(Localizer.Format("#LOC_NASA_5"));
+                Machine.RunEvent(Localizer.Format("Launched"));
             }
 
             //sequence
@@ -194,7 +195,7 @@ namespace NASA_CountDown.States
             {
                 CountDownMain.instance.saveLoadWinPos.initialWindow = CountDownMain.instance.initial._windowRect;
                 //CountDownMain.instance.saveLoadWinPos.SaveSettings();
-                Machine.RunEvent(Localizer.Format("#LOC_NASA_4"));
+                Machine.RunEvent(Localizer.Format("Sequence"));
             }
 
             //settings
@@ -206,7 +207,7 @@ namespace NASA_CountDown.States
             {
                 CountDownMain.instance.saveLoadWinPos.initialWindow = CountDownMain.instance.initial._windowRect;
                // CountDownMain.instance.saveLoadWinPos.SaveSettings();
-                Machine.RunEvent(Localizer.Format("#LOC_NASA_3"));
+                Machine.RunEvent(Localizer.Format("Settings"));
             }
         }
 

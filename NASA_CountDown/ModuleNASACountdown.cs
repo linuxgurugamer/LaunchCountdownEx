@@ -15,7 +15,7 @@ namespace NASA_CountDown
 
         public static string CraftName(Vessel v)
         {
-            Log.Info("CraftName");
+            //Log.Info("CraftName");
 #if false
             var stackTrace = new StackTrace(true);
             foreach (var r in stackTrace.GetFrames())

@@ -71,7 +71,8 @@ namespace NASA_CountDown.Config
 
             settings.AddValue("soundEnabled", IsSoundEnabled);
             settings.AddValue("scale", Scale);
-            settings.AddValue("soundSet", SoundSet);
+            if (SoundSet != null)
+                settings.AddValue("soundSet", SoundSet);
 
 
 
@@ -238,7 +239,7 @@ namespace NASA_CountDown.Config
         {
             get
             {
-                if (!ConfigInfo.Instance.IsSoundEnabled)
+                if (!ConfigInfo.Instance.IsSoundEnabled || SoundSet == null)
                     return null;
                 return AudioSets.ContainsKey(SoundSet) ? AudioSets[SoundSet] : null;
             }

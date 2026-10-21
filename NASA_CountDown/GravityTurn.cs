@@ -36,7 +36,7 @@ namespace NASA_CountDown
             Log.Info("Entering VerifyAssemblyVersion, name: " + name);
             // Logic courtesy of DMagic
             var assembly = AssemblyLoader.loadedAssemblies.SingleOrDefault(a => a.assembly.GetName().Name == name);
-            Log.Info("VerifyAssemblyVersion 2");
+
             if (assembly != null)
             {
                 if (version == null || version == "")
@@ -72,7 +72,7 @@ namespace NASA_CountDown
             }
             else
             {
-                Log.Error("Couldn't find assembly for '" + name + "'!");
+                Log.Info("Couldn't find assembly for '" + name + "'!");
                 return null;
             }
         }
@@ -115,14 +115,14 @@ namespace NASA_CountDown
         static string gtName = Localizer.Format("#LOC_NASA_7");
         public static bool Launch()
         {
-            Log.Info("Launch");
+            //Log.Info("Launch");
             if (!GTAvailable || !ConfigInfo.Instance.VesselOptions[ModuleNASACountdown.CraftName(FlightGlobals.ActiveVessel)].useGravityTurn)
             {
                 return false;
             }
             if (!ConfigInfo.Instance.VesselOptions[ModuleNASACountdown.CraftName(FlightGlobals.ActiveVessel)].LaunchSequenceControl)
                 return false;
-            Log.Info("GravityTurn detected");
+
             try
             {
                 //Type calledType = Type.GetType("GravityTurn.GravityTurner,GravityTurn");

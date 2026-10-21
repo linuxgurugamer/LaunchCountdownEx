@@ -76,7 +76,7 @@ namespace NASA_CountDown.States
                 yield return new WaitForSeconds(clip.length);
             }
             
-            Machine.RunEvent(Localizer.Format("#LOC_NASA_1"));
+            Machine.RunEvent(Localizer.Format("Finish"));
         }
 
         public override void Draw()

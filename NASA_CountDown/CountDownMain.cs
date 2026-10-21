@@ -93,7 +93,7 @@ namespace NASA_CountDown
         void ToggleOff()
         {
             Log.Info("ToggleOff");
-            _machine.RunEvent(Localizer.Format("#LOC_NASA_1"));
+            _machine.RunEvent(Localizer.Format("Finish"));
 
             //saveLoadWinPos.LoadWindowPositions();
             
@@ -116,9 +116,9 @@ namespace NASA_CountDown
             Log.Info("ToggleOn");
             if (!_machine.Started)
             {
-                _machine.StartFSM(Localizer.Format("#LOC_NASA_2"));
+                _machine.StartFSM(Localizer.Format("Init"));
             } else {
-                _machine.RunEvent(Localizer.Format("#LOC_NASA_2"));
+                _machine.RunEvent(Localizer.Format("Init"));
             }
 
             saveLoadWinPos.LoadWindowPositions();
@@ -137,38 +137,38 @@ namespace NASA_CountDown
 
             // Create the states
 
-            initial = new InitialState(Localizer.Format("#LOC_NASA_2"), _machine);
-            settings = new SettingState(Localizer.Format("#LOC_NASA_3"), _machine);
-            sequence = new SequenceState(Localizer.Format("#LOC_NASA_4"), _machine);
-            launch = new LaunchState(Localizer.Format("#LOC_NASA_5"), _machine);
-            launched = new LaunchedState(Localizer.Format("#LOC_NASA_6"), _machine);
-            finish = new KFSMState(Localizer.Format("#LOC_NASA_1"));
+            initial = new InitialState(Localizer.Format("Init"), _machine);
+            settings = new SettingState(Localizer.Format("Settings"), _machine);
+            sequence = new SequenceState(Localizer.Format("Sequence"), _machine);
+            launch = new LaunchState(Localizer.Format("Launched"), _machine);
+            launched = new LaunchedState(Localizer.Format("Launched"), _machine);
+            finish = new KFSMState(Localizer.Format("Finish"));
 
             // Add events to the states
 
-            var go2Finish = new KFSMEvent(Localizer.Format("#LOC_NASA_1"))
+            var go2Finish = new KFSMEvent(Localizer.Format("Finish"))
             {
                 GoToStateOnEvent = finish,
                 updateMode = KFSMUpdateMode.MANUAL_TRIGGER
             };
 
-            var go2Settings = new KFSMEvent(Localizer.Format("#LOC_NASA_3")) { GoToStateOnEvent = settings, updateMode = KFSMUpdateMode.MANUAL_TRIGGER };
+            var go2Settings = new KFSMEvent(Localizer.Format("Settings")) { GoToStateOnEvent = settings, updateMode = KFSMUpdateMode.MANUAL_TRIGGER };
             initial.AddEvent(go2Settings);
 
-            var go2Init = new KFSMEvent(Localizer.Format("#LOC_NASA_2")) { GoToStateOnEvent = initial, updateMode = KFSMUpdateMode.MANUAL_TRIGGER };
+            var go2Init = new KFSMEvent(Localizer.Format("Init")) { GoToStateOnEvent = initial, updateMode = KFSMUpdateMode.MANUAL_TRIGGER };
             settings.AddEvent(go2Init);
             sequence.AddEvent(go2Init);
             finish.AddEvent(go2Init);
 
-            var go2Sequence = new KFSMEvent(Localizer.Format("#LOC_NASA_4")) { GoToStateOnEvent = sequence, updateMode = KFSMUpdateMode.MANUAL_TRIGGER };
+            var go2Sequence = new KFSMEvent(Localizer.Format("Sequence")) { GoToStateOnEvent = sequence, updateMode = KFSMUpdateMode.MANUAL_TRIGGER };
             initial.AddEvent(go2Sequence);
 
-            var go2Launch = new KFSMEvent(Localizer.Format("#LOC_NASA_5")) { GoToStateOnEvent = launch, updateMode = KFSMUpdateMode.MANUAL_TRIGGER };
+            var go2Launch = new KFSMEvent(Localizer.Format("Launched")) { GoToStateOnEvent = launch, updateMode = KFSMUpdateMode.MANUAL_TRIGGER };
             initial.AddEvent(go2Launch);
             launch.AddEvent(go2Init);
             launch.AddEvent(go2Finish);
 
-            var go2Launched = new KFSMEvent(Localizer.Format("#LOC_NASA_6")) { GoToStateOnEvent = launched, updateMode = KFSMUpdateMode.MANUAL_TRIGGER };
+            var go2Launched = new KFSMEvent(Localizer.Format("Launched")) { GoToStateOnEvent = launched, updateMode = KFSMUpdateMode.MANUAL_TRIGGER };
             launch.AddEvent(go2Launched);
 
             initial.AddEvent(go2Finish);

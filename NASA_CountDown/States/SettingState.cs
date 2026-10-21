@@ -105,7 +105,7 @@ namespace NASA_CountDown.States
                     StyleFactory.ButtonBackStyle))
             {
                 CountDownMain.instance.saveLoadWinPos.SaveSettings();
-                Machine.RunEvent(Localizer.Format("#LOC_NASA_2"));
+                Machine.RunEvent(Localizer.Format("Init"));
             }
 
             GUILayout.EndVertical();

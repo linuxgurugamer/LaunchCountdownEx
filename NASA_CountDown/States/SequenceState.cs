@@ -140,7 +140,7 @@ namespace NASA_CountDown.States
             if (GUILayout.Button(new GUIContent(), StyleFactory.ButtonBackStyle))
             {
                 CountDownMain.instance.saveLoadWinPos.SaveSettings();
-                Machine.RunEvent(Localizer.Format("#LOC_NASA_2"));
+                Machine.RunEvent(Localizer.Format("Init"));
             }
 
             GUILayout.FlexibleSpace();

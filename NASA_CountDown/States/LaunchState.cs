@@ -58,7 +58,7 @@ namespace NASA_CountDown.States
         //bool hold = false;
         protected override void DrawButtons()
         {
-            Log.Info("LaunchState.DrawButtons");
+            // Log.Info("LaunchState.DrawButtons");
 
             var buttonWidth = StyleFactory.ButtonLaunchStyle.fixedWidth;
             var buttonHeight = StyleFactory.ButtonLaunchStyle.fixedHeight;
@@ -92,15 +92,18 @@ namespace NASA_CountDown.States
         private IEnumerator Abort()
         {
             TimeWarp.SetRate(0, false);
-            var clip = ConfigInfo.Instance.CurrentAudio.Abort;
             if (GravityTurnAPI.GravityTurnActive)
                 GravityTurnAPI.Kill();
             holdPlayed = true;
-
-
-            if (clip != null)
+            if (ConfigInfo.Instance.CurrentAudio != null)
             {
-                CountDownMain.instance.PlaySound(clip);
+                var clip = ConfigInfo.Instance.CurrentAudio.Abort;
+
+
+                if (clip != null)
+                {
+                    CountDownMain.instance.PlaySound(clip);
+                }
             }
 
             if (ConfigInfo.Instance.AbortExecuted)
@@ -110,7 +113,7 @@ namespace NASA_CountDown.States
                 //BaseAction.FireAction(FlightGlobals.ActiveVessel.Parts, KSPActionGroup.Abort,0, KSPActionType.Activate);
             }
 
-            Machine.RunEvent(Localizer.Format("#LOC_NASA_2"));
+            Machine.RunEvent(Localizer.Format("Init"));
             yield return null;
         }
 
@@ -174,7 +177,7 @@ namespace NASA_CountDown.States
 
         private void OnFlyByWire(FlightCtrlState st)
         {
-            Log.Info("OnFlyByWire, tic: " + _tick);
+            //Log.Info("OnFlyByWire, tic: " + _tick);
             switch (_tick)
             {
                 case 7:
@@ -188,7 +191,7 @@ namespace NASA_CountDown.States
                     break;
                 case 0:
                     //st.mainThrottle = 1f;
-                    Log.Info("OnFlyByWire, before GravityTurnAPI.Launch");
+                    //Log.Info("OnFlyByWire, before GravityTurnAPI.Launch");
                     if (GravityTurnAPI.Launch())  // If GravityTurn is available
                         break;
 
@@ -215,7 +218,7 @@ namespace NASA_CountDown.States
             switch (data.to)
             {
                 case Vessel.Situations.FLYING:
-                    Machine.RunEvent(Localizer.Format("#LOC_NASA_6"));
+                    Machine.RunEvent(Localizer.Format("Launched"));
                     break;
                 case Vessel.Situations.LANDED:
                     break;
@@ -224,7 +227,7 @@ namespace NASA_CountDown.States
                 case Vessel.Situations.ORBITING:
                 case Vessel.Situations.ESCAPING:
                 case Vessel.Situations.DOCKED:
-                    Machine.RunEvent(Localizer.Format("#LOC_NASA_1"));
+                    Machine.RunEvent(Localizer.Format("Finish"));
                     break;
                 case Vessel.Situations.PRELAUNCH:
                     break;

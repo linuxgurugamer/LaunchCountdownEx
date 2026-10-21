@@ -1,5 +1,11 @@
 ChangeLog
 
+1.3.13
+	Fixed occasional nullref when saving config
+	Changed error about GravityTurn missing to an info
+	Fixed exception caused when no audio has been selected
+	Fixed exception caused when no audio selected, launch started and then abort clicked after launch
+
 1.3.12
 	Localized the mod
 
