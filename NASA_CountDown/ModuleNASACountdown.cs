@@ -31,8 +31,12 @@ namespace NASA_CountDown
 
                 if (p != null && p.Modules.Contains<ModuleCommand>())
                 {
-                    ModuleNASACountdown m = p.Modules.GetModule<ModuleNASACountdown>();
-                    return m.craftName;
+                    if (p.Modules.Contains<ModuleNASACountdown>())
+                    {
+                        ModuleNASACountdown m = p.Modules.GetModule<ModuleNASACountdown>();
+                        if (m != null)
+                            return m.craftName;
+                    }
                 }
             }
 
